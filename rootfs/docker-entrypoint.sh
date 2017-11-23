@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+trap "exit" SIGINT SIGTERM
+
 command=$1
 shift
 
