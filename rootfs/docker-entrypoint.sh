@@ -3,7 +3,7 @@
 command=$1
 shift
 
-TIMEOUT=${TIMEOUT:-60}
+TIMEOUT=${TIMEOUT:-60} # Number of attempts at connecting before timing out
 
 #
 # Set up MySQL credentials
@@ -53,8 +53,6 @@ while [ $searching = "true" ]; do
   pg_isready --quiet
   postgres_rc=$?
 
-  ((count = count - 1))
-
   if [ $mysql_rc -eq 0 ]; then
     searching=false
     export DB_KIND=mysql
@@ -64,6 +62,8 @@ while [ $searching = "true" ]; do
   elif [[ $count -eq 0 ]]; then
     searching=false
   else
+    ((count = count - 1))
+
     sleep 1
   fi
 done
