@@ -1,0 +1,24 @@
+version: '2'
+services:
+  db-mysql:
+    build: .
+    environment:
+      DB_USERNAME: root
+      DB_PASSWORD: gnome
+      DB_HOSTNAME: mysql
+    command: exec mysqladmin create bwah
+  db-postgres:
+    build: .
+    environment:
+      DB_USERNAME: postgres
+      DB_PASSWORD: gnome
+      DB_HOSTNAME: postgres
+    command: exec createdb bwah
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: gnome
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: gnome
